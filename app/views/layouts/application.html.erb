@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+      .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          height: 80px;
+          background-color: #b3f2eb;
+      }
+
+      .nav-link.edit-profile-btn {
+          background-color: #789491;
+          color: white;
+          font-size: 16px;
+          padding: 5px 15px;
+          border-radius: 5px;
+          margin-right: 20px;
+      }
+
+      .nav-link.auth-btn {
+          background-color: #789491;
+          color: white;
+          font-size: 16px;
+          padding: 5px 15px;
+          border-radius: 5px;
+          margin-right: 20px;
+      }
+
+      .nav-link.logout-btn {
+          background-color: #d9534f;
+          color: white;
+          font-size: 16px;
+          padding: 5px 15px;
+          border-radius: 5px;
+      }
+
+  </style>
+  <title>Movie_Review</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<nav class="navbar">
+  <div class="movies">
+    <h1><%= link_to 'Movie Review', root_path %></h1>
+  </div>
+
+  <% if user_signed_in? %>
+    <div>
+      Welcome! You're logged in as <strong><%= current_user.email %></strong>.
+      <%= link_to 'New Movie', new_movie_path, class: 'nav-link edit-profile-btn' %>
+      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link logout-btn' %>
+    </div>
+  <% else %>
+    <div>
+      <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link auth-btn' %>
+      <%= link_to 'Login', new_user_session_path, class: 'nav-link auth-btn' %>
+    </div>
+  <% end %>
+</nav>
+
+<%= yield %>
+</body>
+</html>

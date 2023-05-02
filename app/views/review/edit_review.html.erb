@@ -1,0 +1,103 @@
+<h1>Edit Review</h1>
+
+<head>
+  <style>
+      /* Style for the header */
+      h1 {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 20px;
+      }
+
+      /* Style for the radio buttons */
+      input[type=radio] {
+          display: inline-block;
+          margin-right: 10px;
+      }
+
+      /* Style for the comment field */
+      label {
+          font-size: 16px;
+          font-weight: bold;
+          display: block;
+          margin-bottom: 10px;
+      }
+
+      textarea {
+          display: block;
+          width: 50%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+          margin-bottom: 20px;
+          resize: vertical;
+      }
+
+      /* Style for the submit button */
+      input[type=submit] {
+          background-color: #333;
+          color: #fff;
+          padding: 10px 20px;
+          font-size: 16px;
+          font-weight: bold;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+      }
+
+      input[type=submit]:hover {
+          background-color: #000;
+      }
+
+      /* Style for the back button */
+      .back {
+          background-color: #ccc;
+          color: #fff;
+          display: inline-block;
+          font-size: 16px;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 0.3s ease;
+      }
+
+      a:hover {
+          background-color: #999;
+      }
+
+      /* Style for the delete button */
+      .delete-button {
+          background-color: #ff3333;
+          color: #fff;
+          display: inline-block;
+          font-size: 16px;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 0.3s ease;
+      }
+
+      .delete-button:hover {
+          background-color: #e60000;
+      }
+  </style>
+</head>
+
+
+<%= form_for [@movie, @review], url: update_review_path(@movie, @review) do |f| %>
+  <h3>Rate</h3>
+  <%= f.radio_button :ratings, 1 %>⭐ 1
+  <%= f.radio_button :ratings, 2 %>⭐ 2
+  <%= f.radio_button :ratings, 3 %>⭐ 3
+  <%= f.radio_button :ratings, 4 %>⭐ 4
+  <%= f.radio_button :ratings, 5 %>⭐ 5
+  <label>Comments</label>
+  <%= f.text_area :comments %>
+  <%= f.submit "Update Review" %>
+<% end %>
+<br>
+
+<%= link_to 'Back', movie_path(@movie),class:"back" %>
+

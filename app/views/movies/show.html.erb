@@ -1,0 +1,142 @@
+<head>
+  <style>
+          /* Style for the movie name */
+      p strong {
+          font-size: 20px;
+          font-weight: bold;
+          margin-bottom: 10px;
+      }
+
+      /* Style for the review comments */
+      .comment {
+          background-color: #f2f2f2;
+          border: 1px solid #ccc;
+          padding: 10px;
+          margin-bottom: 20px;
+      }
+
+      .comment b {
+          font-size: 16px;
+          font-weight: bold;
+          margin-bottom: 5px;
+      }
+
+      .comment p {
+          font-size: 14px;
+          margin-top: 5px;
+          margin-bottom: 0;
+      }
+
+      .comment a {
+          color: #333;
+          font-size: 14px;
+          margin-top: 10px;
+          display: inline-block;
+      }
+
+      .comment a:hover {
+          color: #000;
+      }
+
+      /* Style for the back button */
+      a.back-button {
+          background-color: #333;
+          color: #fff;
+          display: inline-block;
+          font-size: 16px;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 0.3s ease;
+      }
+
+      a.back-button:hover {
+          background-color: #000;
+          color: #fff;
+      }
+
+      /* Style for the edit button */
+      a.edit-button {
+          background-color: #ccc;
+          color: #333;
+          display: inline-block;
+          font-size: 16px;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 0.3s ease;
+      }
+
+      a.edit-button:hover {
+          background-color: #999;
+          color: #fff;
+      }
+
+      /* Style for the destroy button */
+      a.destroy-button {
+          background-color: #b51623;
+          color: #fff;
+          display: inline-block;
+          font-size: 16px;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 0.3s ease;
+      }
+
+      a.destroy-button:hover {
+          background-color: #cb2b39;
+          color: #fff;
+      }
+      .back {
+          background-color: #333;
+          color: #fff;
+          display: inline-block;
+          font-size: 16px;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 0.3s ease;
+      }
+
+      a:hover {
+          background-color: #000;
+          color: #fff;
+      }
+          .button-color {
+              background-color: #789491;
+              color: white;
+              border: none;
+              padding: 10px;
+              border-radius: 5px;
+          }
+
+          .button-color:hover {
+              opacity: 0.8;
+              cursor: pointer;
+          }
+  </style>
+</head>
+<p id="notice"><%= notice %></p>
+<p>
+<h1><%= @movie.name %></h1>
+</p>
+<% @reviews.each do |review| %>
+
+  <div class="comment">
+    <% review.ratings.times.each do |r| %>
+      ⭐
+    <% end %><br>
+    <b><%= review.comments %></b> <%= time_ago_in_words(review.created_at) %> ago
+    <p>Posted by: <%= review.user.email %></p>
+    <% if can? :update, review %>
+      <td><%= link_to 'Edit', edit_review_path(@movie, review), class: "edit-button" %></td>
+    <% end %>
+    <% if can? :destroy, review %>
+      <td><%= link_to 'Destroy', [@movie, review], method: :delete, data: { confirm: 'Are you sure?' }, class: "destroy-button" %></td><br>
+    <% end %>
+  </div>
+<%end %>
+<h3><%= link_to 'Post Review', review_create_path(@movie), class: 'button-color', style:"color:white" %></h3>
+<%= link_to 'Back', movies_path, class:"back" %>
+

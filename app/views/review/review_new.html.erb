@@ -1,0 +1,45 @@
+<head>
+  <style>
+      .back {
+          background-color: #ccc;
+          color: #fff;
+          display: inline-block;
+          font-size: 16px;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 0.3s ease;
+      }
+      .sub_btn{
+          background-color:#789491;
+          color: #fff;
+          display: inline-block;
+          font-size: 16px;
+          padding: 10px 20px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 0.3s ease;
+
+      }
+
+  </style>
+</head>
+<h1>Your Review for <span style="color:red;"><%= @movie.name %></span></h1>
+
+<%= form_with(model:@review,url: movie_review_path(@movie)) do |f| %>
+  <div class="form-group">
+    <h3>Rate</h3>
+    <%= f.radio_button :ratings, 1 %>⭐ 1
+    <%= f.radio_button :ratings, 2 %>⭐ 2
+    <%= f.radio_button :ratings, 3 %>⭐ 3
+    <%= f.radio_button :ratings, 4 %>⭐ 4
+    <%= f.radio_button :ratings, 5 %>⭐ 5
+  </div>
+  <h3>Comment</h3>
+  <%= f.text_area :comments, placeholder: "Leave a comment..." %>
+
+  <%= f.submit "Add Review",class:"sub_btn" %>
+<% end %>
+<br>
+
+<%= link_to 'Back', movies_path,class:"back" %>

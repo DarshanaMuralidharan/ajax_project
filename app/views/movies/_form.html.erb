@@ -1,0 +1,108 @@
+
+
+<%= form_with(model: @movie, local: true, class: "movie-form") do |form| %>
+  <head>
+    <style>
+        /* Set a max-width for the form to limit its size on larger screens */
+        .movie-form {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Style the form fields */
+        .form-fields {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .field {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .field input,
+        .field select {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 2px #ccc;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .field input[type="date"] {
+            /* Remove the default appearance of the date field */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            /* Add a custom background and arrow icon */
+            background-image: url("https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-arrow-down-512.png");
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: 16px 16px;
+            padding-right: 30px;
+        }
+
+        /* Style the form actions */
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-color {
+            background-color: #789491;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .button-color:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+
+    </style>
+  </head>
+  <% if @movie.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+
+      <ul>
+        <% @movie.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-fields">
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :release_date %>
+      <%= form.date_field :release_date %>
+    </div>
+
+    <div class="field">
+      <%= form.label :image %>
+      <%= form.file_field :image%>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit class: "button-color" %>
+  </div>
+<% end %>
